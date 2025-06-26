@@ -1,3 +1,4 @@
+import { ClerkProvider } from "@clerk/nextjs";
 import { Nunito_Sans } from "next/font/google";
 import "./globals.css";
 
@@ -13,8 +14,14 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${nunitoSans.variable} antialiased`}>{children}</body>
-    </html>
+    <ClerkProvider
+      appearance={{
+        cssLayerName: "clerk",
+      }}
+    >
+      <html lang="en">
+        <body className={`${nunitoSans.variable} antialiased`}>{children}</body>
+      </html>
+    </ClerkProvider>
   );
 }
