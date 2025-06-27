@@ -10,6 +10,7 @@ import { db } from "@/utils/dbconnection";
 import { Pencil1Icon } from "@radix-ui/react-icons";
 import { Tabs } from "radix-ui";
 import { SpacerLeft, SpacerRight } from "@/components/Spacer";
+import FollowedPosts from "@/components/FollowedPosts";
 
 export default async function HomePage({ searchParams }) {
   const show = (await searchParams).show;
@@ -45,7 +46,7 @@ export default async function HomePage({ searchParams }) {
               </Tabs.List>
               <Tabs.Content value="following">
                 <SpacerLeft />
-                <PostList />
+                <FollowedPosts userID={user.id} />
               </Tabs.Content>
               <Tabs.Content value="allposts">
                 <SpacerRight />
