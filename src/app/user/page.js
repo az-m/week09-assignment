@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import PostModal from "@/components/PostModal";
 import { currentUser } from "@clerk/nextjs/server";
 import { db } from "@/utils/dbconnection";
+import TopBioSection from "@/components/TopBioSection";
 
 export default async function UserPage({ searchParams }) {
   const show = (await searchParams).show;
@@ -22,6 +23,11 @@ export default async function UserPage({ searchParams }) {
       <div>
         <LeftSidebar />
         <div className="relative flex flex-col justify-self-center items-center min-w-[375px] max-w-[600px] min-h-[100dvh] bg-background">
+          <TopBioSection
+            userID={user.id}
+            userName={user.username}
+            userBio={user.about}
+          />
           <PostList userID={user.id} />
           <Link
             href="/user?show=true"
