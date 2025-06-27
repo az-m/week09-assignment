@@ -1,5 +1,5 @@
 import RightSidebar from "@/components/RightSidebar";
-import UserPostList from "@/components/UserPostList";
+import PostList from "@/components/PostList";
 import LeftSidebar from "@/components/LeftSidebar";
 import Link from "next/link";
 import Footer from "@/components/Footer";
@@ -22,7 +22,7 @@ export default async function UserPage({ searchParams }) {
       <div>
         <LeftSidebar />
         <div className="relative flex flex-col justify-self-center items-center min-w-[375px] max-w-[600px] min-h-[100dvh] bg-background">
-          <UserPostList userID={user.id} />
+          <PostList userID={user.id} />
           <Link
             href="/user?show=true"
             className="fixed right-5 bottom-15 content-center p-2 bg-sky-500 rounded-[50%] w-[50px] h-[50px] text-center z-2"

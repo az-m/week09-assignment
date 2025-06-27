@@ -1,4 +1,6 @@
 import { db } from "@/utils/dbconnection";
+import { revalidatePath } from "next/cache";
+
 export default function NewPostForm({ userID }) {
   async function handleNewPost(formData) {
     "use server";
@@ -36,6 +38,9 @@ export default function NewPostForm({ userID }) {
 
     temp = null;
     await db.query(`UPDATE posts9 SET temp = $1`, [temp]);
+
+    revalidatePath("/");
+    revalidatePath("/user");
   }
 
   return (

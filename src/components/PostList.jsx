@@ -1,18 +1,34 @@
 import { db } from "@/utils/dbconnection";
 
-export default async function UserPostList({ userID }) {
-  const userPosts = (
-    await db.query(
-      `SELECT posts9.id, posts9.title, posts9.content, posts9.created_at, users.username, ARRAY_AGG(tags9.tag) AS tags
+export default async function PostList({ userID }) {
+  let userPosts;
+
+  if (userID) {
+    userPosts = (
+      await db.query(
+        `SELECT posts9.id, posts9.title, posts9.content, posts9.created_at, users.username, ARRAY_AGG(tags9.tag) AS tags
         FROM posts9 
         JOIN users ON posts9.user_id = users.id
         JOIN tags9 ON posts9.id = tags9.post_id
         WHERE posts9.user_id = $1
         GROUP BY posts9.id, posts9.title, posts9.content, posts9.created_at, users.username
         ORDER BY created_at DESC`,
-      [userID]
-    )
-  ).rows;
+        [userID]
+      )
+    ).rows;
+  } else {
+    userPosts = (
+      await db.query(
+        `SELECT posts9.id, posts9.title, posts9.content, posts9.created_at, users.username, ARRAY_AGG(tags9.tag) AS tags
+        FROM posts9 
+        JOIN users ON posts9.user_id = users.id
+        JOIN tags9 ON posts9.id = tags9.post_id
+        GROUP BY posts9.id, posts9.title, posts9.content, posts9.created_at, users.username
+        ORDER BY created_at DESC`
+      )
+    ).rows;
+    console.log(userID);
+  }
 
   let noPosts = "";
   if (userPosts.length === 0) {
@@ -40,7 +56,7 @@ export default async function UserPostList({ userID }) {
             </p>
           ))}
           <p className="p-2 border-t border-content-border">
-            #{post.tags.toString().replace(",", " #")}
+            {post.tags.toString().replace(",", " | ")}
           </p>
         </div>
       ))}
