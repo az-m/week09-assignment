@@ -1,6 +1,6 @@
 export default function RightSidebar() {
   return (
-    <div className="flex flex-col">
+    <div className="hidden">
       <p>Nothing here yet</p>
     </div>
   );

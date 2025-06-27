@@ -1,9 +1,9 @@
 import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 
-export default function LeftSidebar() {
+export default async function LeftSidebar() {
   return (
-    <div className="flex flex-col min-h-[100dvh]">
+    <div className="hidden">
       <UserButton />
       <Link href="/">Home</Link>
       <Link href="/user">My blog</Link>
