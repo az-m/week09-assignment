@@ -1,4 +1,5 @@
 import { db } from "@/utils/dbconnection";
+import Link from "next/link";
 
 export default async function PostList({ userID }) {
   let userPosts;
@@ -6,12 +7,12 @@ export default async function PostList({ userID }) {
   if (userID) {
     userPosts = (
       await db.query(
-        `SELECT posts9.id, posts9.title, posts9.content, posts9.created_at, users.username, ARRAY_AGG(tags9.tag) AS tags
+        `SELECT posts9.id, posts9.title, posts9.content, posts9.created_at, users.id AS user_id, users.username, ARRAY_AGG(tags9.tag) AS tags
         FROM posts9 
         JOIN users ON posts9.user_id = users.id
         JOIN tags9 ON posts9.id = tags9.post_id
         WHERE posts9.user_id = $1
-        GROUP BY posts9.id, posts9.title, posts9.content, posts9.created_at, users.username
+        GROUP BY posts9.id, posts9.title, posts9.content, posts9.created_at, users.id, users.username
         ORDER BY created_at DESC`,
         [userID]
       )
@@ -19,11 +20,11 @@ export default async function PostList({ userID }) {
   } else {
     userPosts = (
       await db.query(
-        `SELECT posts9.id, posts9.title, posts9.content, posts9.created_at, users.username, ARRAY_AGG(tags9.tag) AS tags
+        `SELECT posts9.id, posts9.title, posts9.content, posts9.created_at, users.id AS user_id, users.username, ARRAY_AGG(tags9.tag) AS tags
         FROM posts9 
         JOIN users ON posts9.user_id = users.id
         JOIN tags9 ON posts9.id = tags9.post_id
-        GROUP BY posts9.id, posts9.title, posts9.content, posts9.created_at, users.username
+        GROUP BY posts9.id, posts9.title, posts9.content, posts9.created_at, users.id, users.username
         ORDER BY created_at DESC`
       )
     ).rows;
@@ -43,7 +44,14 @@ export default async function PostList({ userID }) {
           className="bg-content-panel ml-5 mr-5 mb-5 rounded-md p-4 text-lg"
         >
           <p className="p-2 border-b border-content-border grid grid-cols-[65%_35%]">
-            <span>{post.username}</span>
+            <span>
+              <Link
+                href={`/users/${post.user_id}`}
+                className="text-link hover:text-link-hover"
+              >
+                {post.username}
+              </Link>
+            </span>
             <span className="opacity-80 justify-self-end self-center text-xs">
               {post.created_at.toDateString()}
             </span>

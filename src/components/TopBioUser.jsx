@@ -34,7 +34,7 @@ export default function TopBioUser({ userID, userName, userBio }) {
     <div className="mt-10">
       <Dialog.Root>
         <Dialog.Trigger asChild>
-          <p className="flex justify-center text-lg mb-2 not-even:hover:cursor-pointer">
+          <p className="flex justify-center text-lg mb-2 not-even:hover:cursor-pointer text-link hover:text-link-hover">
             {userName}
           </p>
         </Dialog.Trigger>
@@ -77,7 +77,7 @@ export default function TopBioUser({ userID, userName, userBio }) {
 
       <Dialog.Root>
         <Dialog.Trigger asChild>
-          <p className="flex justify-self-center max-w-[300px] hover:cursor-pointer">
+          <p className="flex justify-self-center max-w-[300px] hover:cursor-pointer text-link hover:text-link-hover">
             {userBio}
           </p>
         </Dialog.Trigger>
