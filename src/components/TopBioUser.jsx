@@ -34,7 +34,7 @@ export default function TopBioUser({ userID, userName, userBio }) {
     <div className="mt-10">
       <Dialog.Root>
         <Dialog.Trigger asChild>
-          <p className="flex justify-center text-lg mb-2 not-even:hover:cursor-pointer text-link hover:text-link-hover">
+          <p className="flex justify-center text-xl mb-2 not-even:hover:cursor-pointer text-link hover:text-link-hover font-semibold">
             {userName}
           </p>
         </Dialog.Trigger>

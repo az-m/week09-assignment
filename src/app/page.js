@@ -25,6 +25,7 @@ export default async function HomePage({ searchParams }) {
         <div>
           <LeftSidebar />
           <div className="relative flex flex-col justify-self-center items-center min-w-[375px] max-w-[600px] min-h-[100dvh] bg-background">
+            <h1>Title</h1>
             <PostList />
             <Link
               href="/user?show=true"
