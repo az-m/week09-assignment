@@ -16,7 +16,7 @@ export default function NewPostForm({ userID }) {
       ],
     };
 
-    const temp = parseInt(Math.random() * (1000000 - 1) + 1);
+    let temp = parseInt(Math.random() * (1000000 - 1) + 1);
 
     await db.query(
       `INSERT INTO posts9 (title, content, user_id, temp) VALUES ($1, $2, $3, $4)`,
@@ -35,7 +35,7 @@ export default function NewPostForm({ userID }) {
     }
 
     temp = null;
-    await db.query(`UPDATE posts9 SET temp = $1)`, [temp]);
+    await db.query(`UPDATE posts9 SET temp = $1`, [temp]);
   }
 
   return (

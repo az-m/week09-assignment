@@ -1,8 +1,39 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #4b5563;
   --foreground: #171717;
+  --foreground-reverse: #ededed;
+  --content-panel: #ffffff;
+  --content-border: #dedede;
+  --form-input: #f2f2f2;
+  --link: #7dd3fc; /*sky-300 */
+  --link-hover: #0ea5e9; /*sky-500 */
+  --link-reverse: #0ea5e9;
+  --link-hover-reverse: #7dd3fc;
+  --button-border: #0ea5e9;
+  --button-active: #0284c7; /*sky-600*/
+  --button-hover: #bae6fd; /*sky-200*/
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1d1d22;
+    --foreground: #ededed;
+    --foreground-reverse: #ededed;
+    --content-panel: #212127;
+    --content-border: #383838;
+    --form-input: #1d1d22;
+    --link: #7dd3fc;
+    --link-hover: #0ea5e9;
+    --link-reverse: #7dd3fc;
+    --link-hover-reverse: #0ea5e9;
+    --button-border: #0ea5e9;
+    --button-active: #0284c7; /* sky-600 */
+    --button-hover: #075985; /*sky-800*/
+    color-scheme: dark;
+  }
 }
 
 @layer theme, base, clerk, components, utilities;
@@ -10,19 +41,21 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-foreground-reverse: var(--foreground-reverse);
+  --color-content-panel: var(--content-panel);
+  --color-content-border: var(--content-border);
+  --color-form-input: var(--form-input);
+  --color-link: var(--link);
+  --color-link-hover: var(--link-hover);
+  --color-link-reverse: var(--link-reverse);
+  --color-link-hover-reverse: var(--link-hover-reverse);
+  --color-button-border: var(--button-border);
+  --color-button-active: var(--button-active);
+  --color-button-hover: var(--button-hover);
 }
 
 body {
-  background: var(--background);
+  background: black;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-nunito-sans);
 }

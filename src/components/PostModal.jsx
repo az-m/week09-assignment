@@ -1,5 +1,5 @@
 import Link from "next/link";
-import NewPostForm from "./NewPostForm";
+import NewPostForm from "@/components/NewPostForm";
 
 export default function PostModal({ host, userID }) {
   return (

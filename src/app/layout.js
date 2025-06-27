@@ -1,7 +1,6 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import { Nunito_Sans } from "next/font/google";
 import "./globals.css";
-import Footer from "@/components/Footer";
 
 const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",

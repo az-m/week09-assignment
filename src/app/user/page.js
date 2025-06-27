@@ -21,11 +21,11 @@ export default async function UserPage({ searchParams }) {
     <div>
       <div>
         <LeftSidebar />
-        <div className="relative flex flex-col justify-self-center items-center min-w-[375px] max-w-[600px] h-[100dvh] border">
+        <div className="relative flex flex-col justify-self-center items-center min-w-[375px] max-w-[600px] min-h-[100dvh] bg-background">
           <UserPostList userID={user.id} />
           <Link
             href="/user?show=true"
-            className="absolute right-4 bottom-10 content-center p-2 bg-sky-500 rounded-[50%] w-[50px] h-[50px] text-center z-2"
+            className="fixed right-5 bottom-15 content-center p-2 bg-sky-500 rounded-[50%] w-[50px] h-[50px] text-center z-2"
           >
             Post
           </Link>
