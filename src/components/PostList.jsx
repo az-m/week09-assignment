@@ -27,7 +27,6 @@ export default async function PostList({ userID }) {
         ORDER BY created_at DESC`
       )
     ).rows;
-    console.log(userID);
   }
 
   let noPosts = "";

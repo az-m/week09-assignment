@@ -3,7 +3,7 @@ import { Cross2Icon } from "@radix-ui/react-icons";
 import { db } from "@/utils/dbconnection";
 import { revalidatePath } from "next/cache";
 
-export default function TopBioSection({ userID, userName, userBio }) {
+export default function TopBioUser({ userID, userName, userBio }) {
   async function handleNameSubmit(formData) {
     "use server";
 
@@ -34,7 +34,9 @@ export default function TopBioSection({ userID, userName, userBio }) {
     <div className="mt-10">
       <Dialog.Root>
         <Dialog.Trigger asChild>
-          <p className="hover:cursor-pointer">{userName}</p>
+          <p className="flex justify-center text-lg mb-2 not-even:hover:cursor-pointer">
+            {userName}
+          </p>
         </Dialog.Trigger>
         <Dialog.Portal>
           <Dialog.Overlay className="fixed inset-0" />
@@ -75,7 +77,9 @@ export default function TopBioSection({ userID, userName, userBio }) {
 
       <Dialog.Root>
         <Dialog.Trigger asChild>
-          <p className="hover:cursor-pointer">{userBio}</p>
+          <p className="flex justify-self-center max-w-[300px] hover:cursor-pointer">
+            {userBio}
+          </p>
         </Dialog.Trigger>
         <Dialog.Portal>
           <Dialog.Overlay className="fixed inset-0" />
