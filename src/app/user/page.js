@@ -7,6 +7,7 @@ import PostModal from "@/components/PostModal";
 import { currentUser } from "@clerk/nextjs/server";
 import { db } from "@/utils/dbconnection";
 import TopBioUser from "@/components/TopBioUser";
+import { Pencil1Icon } from "@radix-ui/react-icons";
 
 export default async function UserPage({ searchParams }) {
   const show = (await searchParams).show;
@@ -31,9 +32,9 @@ export default async function UserPage({ searchParams }) {
           <PostList userID={user.id} />
           <Link
             href="/user?show=true"
-            className="fixed right-5 bottom-15 content-center p-2 bg-sky-500 rounded-[50%] w-[50px] h-[50px] text-center z-2"
+            className="fixed right-5 bottom-15 items-center content-center p-2 bg-sky-500 rounded-[50%] w-[50px] h-[50px] z-2"
           >
-            Post
+            <Pencil1Icon className="w-[30px] h-[30px]" />
           </Link>
           {show && <PostModal host="/user" userID={user.id} />}
           <Footer />
