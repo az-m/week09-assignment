@@ -36,7 +36,7 @@ export default async function PostList({ userID }) {
   }
 
   return (
-    <div className="max-w-[600px] mt-10">
+    <div className="max-w-[600px] mt-5">
       <p>{noPosts}</p>
       {userPosts.map((post) => (
         <div
