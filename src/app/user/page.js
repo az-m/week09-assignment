@@ -40,12 +40,8 @@ export default async function UserPage({ searchParams }) {
             <Pencil1Icon className="w-[30px] h-[30px]" />
           </Link>
           {post && <PostModal host="/user" userID={user.id} act="post" />}
-          {upd && (
-            <PostModal host="/user" userID={user.id} act="upd" id={editid} />
-          )}
-          {del && (
-            <PostModal host="/user" userID={user.id} act="del" id={editid} />
-          )}
+          {upd && <PostModal host="/user" act="upd" id={editid} />}
+          {del && <PostModal host="/user" act="del" id={editid} />}
           <Footer />
         </div>
         <RightSidebar />

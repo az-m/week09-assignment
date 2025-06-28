@@ -1,6 +1,7 @@
 import Link from "next/link";
 import NewPostForm from "@/components/NewPostForm";
 import UpdatePostForm from "@/components/UpdatePostForm";
+import DeletePostForm from "@/components/DeletePostForm";
 
 export default function PostModal({ host, userID, act, id }) {
   return (
@@ -8,7 +9,8 @@ export default function PostModal({ host, userID, act, id }) {
       <div className="pt-8 pb-8 border-2 w-96 rounded-md bg-background">
         <div className="text-center">
           {act === "post" && <NewPostForm userID={userID} />}
-          {act === "upd" && <UpdatePostForm userID={userID} postID={id} />}
+          {act === "upd" && <UpdatePostForm postID={id} />}
+          {act === "del" && <DeletePostForm postID={id} />}
           <div className="flex justify-center mt-4">
             <Link
               href={host}

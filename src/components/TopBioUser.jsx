@@ -2,6 +2,7 @@ import { Dialog } from "radix-ui";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { db } from "@/utils/dbconnection";
 import { revalidatePath } from "next/cache";
+import { Pencil1Icon } from "@radix-ui/react-icons";
 
 export default function TopBioUser({ userID, userName, userBio }) {
   async function handleNameSubmit(formData) {
@@ -34,8 +35,9 @@ export default function TopBioUser({ userID, userName, userBio }) {
     <div className="mt-10">
       <Dialog.Root>
         <Dialog.Trigger asChild>
-          <p className="flex justify-center text-xl mb-2 not-even:hover:cursor-pointer text-link hover:text-link-hover font-semibold">
+          <p className="flex justify-center text-xl mb-2 hover:cursor-pointer hover:text-link font-semibold">
             {userName}
+            <Pencil1Icon className="w-[12px] h-[12px] translate-y-2 translate-x-4" />
           </p>
         </Dialog.Trigger>
         <Dialog.Portal>
@@ -77,8 +79,9 @@ export default function TopBioUser({ userID, userName, userBio }) {
 
       <Dialog.Root>
         <Dialog.Trigger asChild>
-          <p className="flex justify-self-center max-w-[300px] hover:cursor-pointer text-link hover:text-link-hover">
+          <p className="flex justify-self-center max-w-[300px] hover:cursor-pointer hover:text-link">
             {userBio}
+            <Pencil1Icon className="w-[12px] h-[12px] translate-y-1 translate-x-2" />
           </p>
         </Dialog.Trigger>
         <Dialog.Portal>
