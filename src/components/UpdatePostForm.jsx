@@ -37,11 +37,15 @@ export default async function UpdatePostForm({ postID }) {
 
     db.query(`DELETE FROM tags9 WHERE post_id = $1`, [postID]);
 
-    for (let t = 0; t < data.tags.length; t++) {
-      await db.query(`INSERT INTO tags9 (tag, post_id) VALUES ($1,$2)`, [
-        data.tags[t],
-        postID,
-      ]);
+    if (data.tags.length === 0) {
+      await db.query(`INSERT INTO tags9 (post_id) VALUES ($1)`, [postID]);
+    } else {
+      for (let t = 0; t < data.tags.length; t++) {
+        await db.query(`INSERT INTO tags9 (tag, post_id) VALUES ($1,$2)`, [
+          data.tags[t],
+          postID,
+        ]);
+      }
     }
 
     revalidatePath("/");

@@ -1,6 +1,6 @@
 import { db } from "@/utils/dbconnection";
 import Link from "next/link";
-import { DropdownMenu } from "radix-ui";
+import PostOptions from "@/components/PostOptions";
 
 export default async function PostList({ userID }) {
   let userPosts;
@@ -67,40 +67,7 @@ export default async function PostList({ userID }) {
             {post.tags[0] && "#" + post.tags.toString().replace(",", " #")}
           </p>
           <div className="justify-self-end">
-            <DropdownMenu.Root>
-              <DropdownMenu.Trigger className="focus: outline-none">
-                <span className="text-2xl hover:text-link-hover hover:cursor-pointer">
-                  &hellip;
-                </span>
-              </DropdownMenu.Trigger>
-              <DropdownMenu.Portal>
-                <DropdownMenu.Content className="bg-gray-900 py-2 px-4 -translate-x-8 translate-y-2 rounded-sm">
-                  <DropdownMenu.Item className="mb-1">
-                    <p className="hover:text-link">REPLY</p>
-                  </DropdownMenu.Item>
-                  <DropdownMenu.Item className="mb-1">
-                    {post.user_id === userID && (
-                      <Link
-                        href={`/user?upd=true&postid=${post.id}`}
-                        className="hover:text-link"
-                      >
-                        UPDATE
-                      </Link>
-                    )}
-                  </DropdownMenu.Item>
-                  <DropdownMenu.Item className="mb-1">
-                    {post.user_id === userID && (
-                      <Link
-                        href={`/user?del=true&postid=${post.id}`}
-                        className="text-red-500 hover:font-bold"
-                      >
-                        DELETE
-                      </Link>
-                    )}
-                  </DropdownMenu.Item>
-                </DropdownMenu.Content>
-              </DropdownMenu.Portal>
-            </DropdownMenu.Root>
+            <PostOptions puid={post.user_id} uid={userID} pid={post.id} />
           </div>
         </div>
       ))}
