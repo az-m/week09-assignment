@@ -4,9 +4,8 @@ import { DropdownMenu } from "radix-ui";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function PostOptions({ puid, uid, pid }) {
+export default function PostOptions({ puid, uid, pid, host }) {
   const [open, setOpen] = useState(false);
-
   function handleClick() {
     setOpen(!open);
   }
@@ -26,7 +25,13 @@ export default function PostOptions({ puid, uid, pid }) {
             X
           </p>
           <DropdownMenu.Item className="mb-1">
-            <p className="hover:text-link">REPLY</p>
+            <Link
+              href={`${host}?reply=${pid}`}
+              className="hover:text-link"
+              onClick={handleClick}
+            >
+              REPLY
+            </Link>
           </DropdownMenu.Item>
           <DropdownMenu.Item className="mb-1">
             {puid === uid && (

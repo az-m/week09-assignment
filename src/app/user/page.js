@@ -14,6 +14,7 @@ export default async function UserPage({ searchParams }) {
   const upd = (await searchParams).upd;
   const del = (await searchParams).del;
   const editid = (await searchParams).postid;
+  const reply = (await searchParams).reply;
 
   const authuser = await currentUser();
   const user = (
@@ -32,7 +33,7 @@ export default async function UserPage({ searchParams }) {
             userName={user.username}
             userBio={user.about}
           />
-          <PostList userID={user.id} />
+          <PostList userID={user.id} reply={reply} host="/user" />
           <Link
             href="/user?post=true"
             className="fixed right-5 bottom-15 items-center content-center p-2 bg-sky-500 rounded-[50%] w-[50px] h-[50px] z-2"

@@ -1,8 +1,10 @@
 import { db } from "@/utils/dbconnection";
 import Link from "next/link";
 import PostOptions from "@/components/PostOptions";
+import Replies from "@/components/Replies";
+import ReplyForm from "@/components/ReplyForm";
 
-export default async function PostList({ userID }) {
+export default async function PostList({ userID, reply, host }) {
   let userPosts;
 
   if (userID) {
@@ -67,11 +69,19 @@ export default async function PostList({ userID }) {
             {post.tags[0] && "#" + post.tags.toString().replace(",", " #")}
           </p>
           <div className="justify-self-end">
-            <PostOptions puid={post.user_id} uid={userID} pid={post.id} />
+            <PostOptions
+              puid={post.user_id}
+              uid={userID}
+              pid={post.id}
+              host={host}
+            />
           </div>
+          {reply == post.id && (
+            <ReplyForm postID={post.id} host={host} reply={reply} />
+          )}
+          <Replies postID={post.id} />
         </div>
       ))}
-      <div></div>
     </div>
   );
 }

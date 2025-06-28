@@ -14,6 +14,7 @@ import FollowedPosts from "@/components/FollowedPosts";
 
 export default async function HomePage({ searchParams }) {
   const post = (await searchParams).post;
+  const reply = (await searchParams).reply;
 
   const authuser = await currentUser();
   const user = (
@@ -27,7 +28,7 @@ export default async function HomePage({ searchParams }) {
       <OnLoad />
       <div>
         <div>
-          <LeftSidebar />
+          {/* <LeftSidebar /> */}
           <div className="relative flex flex-col justify-self-center items-center min-w-[375px] max-w-[600px] min-h-[100dvh] bg-background">
             <Tabs.Root defaultValue="following">
               <Tabs.List className="pl-5 pt-5">
@@ -46,11 +47,11 @@ export default async function HomePage({ searchParams }) {
               </Tabs.List>
               <Tabs.Content value="following">
                 <SpacerLeft />
-                <FollowedPosts userID={user.id} />
+                <FollowedPosts reply={reply} userID={user.id} host="/" />
               </Tabs.Content>
               <Tabs.Content value="allposts">
                 <SpacerRight />
-                <PostList />
+                <PostList reply={reply} host="/" />
               </Tabs.Content>
             </Tabs.Root>
             <Link
@@ -63,7 +64,7 @@ export default async function HomePage({ searchParams }) {
             <Footer />
           </div>
 
-          <RightSidebar />
+          {/* <RightSidebar /> */}
         </div>
       </div>
     </>

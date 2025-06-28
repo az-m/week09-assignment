@@ -1,8 +1,10 @@
 import { db } from "@/utils/dbconnection";
 import Link from "next/link";
 import PostOptions from "@/components/PostOptions";
+import Replies from "@/components/Replies";
+import ReplyForm from "@/components/ReplyForm";
 
-export default async function FollowedPosts({ userID }) {
+export default async function FollowedPosts({ userID, reply, host }) {
   const userPosts = (
     await db.query(
       `SELECT posts9.id, posts9.title, posts9.content, posts9.user_id, posts9.created_at, users.username, ARRAY_AGG(tags9.tag) AS tags FROM follows 
@@ -52,8 +54,12 @@ ORDER BY created_at DESC`,
             {post.tags[0] && "#" + post.tags.toString().replace(",", " #")}
           </p>
           <div className="justify-self-end">
-            <PostOptions pid={post.id} />
+            <PostOptions pid={post.id} uid={null} host={host} />
           </div>
+          {reply == post.id && (
+            <ReplyForm postID={post.id} host={host} reply={reply} />
+          )}
+          <Replies postID={post.id} />
         </div>
       ))}
       <div></div>
