@@ -1,7 +1,6 @@
 import { db } from "@/utils/dbconnection";
 import Link from "next/link";
 import { DropdownMenu } from "radix-ui";
-import { UpdateLink, DeleteLink } from "@/components/PostOptionLinks";
 
 export default async function PostList({ userID }) {
   let userPosts;
@@ -80,10 +79,24 @@ export default async function PostList({ userID }) {
                     <p className="hover:text-link">REPLY</p>
                   </DropdownMenu.Item>
                   <DropdownMenu.Item className="mb-1">
-                    {post.user_id === userID && <UpdateLink />}
+                    {post.user_id === userID && (
+                      <Link
+                        href={`/user?upd=true&postid=${post.id}`}
+                        className="hover:text-link"
+                      >
+                        UPDATE
+                      </Link>
+                    )}
                   </DropdownMenu.Item>
                   <DropdownMenu.Item className="mb-1">
-                    {post.user_id === userID && <DeleteLink />}
+                    {post.user_id === userID && (
+                      <Link
+                        href={`/user?del=true&postid=${post.id}`}
+                        className="text-red-500 hover:font-bold"
+                      >
+                        DELETE
+                      </Link>
+                    )}
                   </DropdownMenu.Item>
                 </DropdownMenu.Content>
               </DropdownMenu.Portal>

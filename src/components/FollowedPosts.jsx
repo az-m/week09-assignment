@@ -48,8 +48,8 @@ ORDER BY created_at DESC`,
               {para}
             </p>
           ))}
-          <p className="p-2 border-t border-content-border">
-            {post.tags.toString().replace(",", " | ")}
+          <p className="p-2 border-t border-content-border opacity-70">
+            {post.tags[0] && "#" + post.tags.toString().replace(",", " #")}
           </p>
           <div className="justify-self-end">
             <DropdownMenu.Root>

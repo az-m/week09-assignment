@@ -10,7 +10,10 @@ import TopBioUser from "@/components/TopBioUser";
 import { Pencil1Icon } from "@radix-ui/react-icons";
 
 export default async function UserPage({ searchParams }) {
-  const show = (await searchParams).show;
+  const post = (await searchParams).post;
+  const upd = (await searchParams).upd;
+  const del = (await searchParams).del;
+  const editid = (await searchParams).postid;
 
   const authuser = await currentUser();
   const user = (
@@ -31,12 +34,18 @@ export default async function UserPage({ searchParams }) {
           />
           <PostList userID={user.id} />
           <Link
-            href="/user?show=true"
+            href="/user?post=true"
             className="fixed right-5 bottom-15 items-center content-center p-2 bg-sky-500 rounded-[50%] w-[50px] h-[50px] z-2"
           >
             <Pencil1Icon className="w-[30px] h-[30px]" />
           </Link>
-          {show && <PostModal host="/user" userID={user.id} />}
+          {post && <PostModal host="/user" userID={user.id} act="post" />}
+          {upd && (
+            <PostModal host="/user" userID={user.id} act="upd" id={editid} />
+          )}
+          {del && (
+            <PostModal host="/user" userID={user.id} act="del" id={editid} />
+          )}
           <Footer />
         </div>
         <RightSidebar />

@@ -13,7 +13,7 @@ import { SpacerLeft, SpacerRight } from "@/components/Spacer";
 import FollowedPosts from "@/components/FollowedPosts";
 
 export default async function HomePage({ searchParams }) {
-  const show = (await searchParams).show;
+  const post = (await searchParams).post;
 
   const authuser = await currentUser();
   const user = (
@@ -54,12 +54,12 @@ export default async function HomePage({ searchParams }) {
               </Tabs.Content>
             </Tabs.Root>
             <Link
-              href="/user?show=true"
+              href="/?post=true"
               className="fixed right-5 bottom-15 content-center p-2 bg-sky-500 rounded-[50%] w-[50px] h-[50px] items-center z-2"
             >
               <Pencil1Icon className="w-[30px] h-[30px]" />
             </Link>
-            {show && <PostModal host="/user" userID={user.id} />}
+            {post && <PostModal host="/" userID={user.id} act="post" />}
             <Footer />
           </div>
 
