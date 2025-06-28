@@ -33,13 +33,13 @@ export default async function HomePage({ searchParams }) {
               <Tabs.List className="pl-5 pt-5">
                 <Tabs.Trigger
                   value="following"
-                  className="text-2xl font-semibold pr-12"
+                  className="text-xl font-semibold pr-10"
                 >
                   Following
                 </Tabs.Trigger>
                 <Tabs.Trigger
                   value="allposts"
-                  className="text-2xl font-semibold"
+                  className="text-xl font-semibold"
                 >
                   All Posts
                 </Tabs.Trigger>

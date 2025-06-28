@@ -44,48 +44,53 @@ export default function NewPostForm({ userID }) {
   }
 
   return (
-    <form
-      action={handleNewPost}
-      className="pl-4 pr-4 pb-3 border-b border-content-border"
-    >
-      <fieldset className="flex flex-col text-black">
-        <span>
-          <label htmlFor="title">Title:</label>
-          <input
-            type="text"
-            name="title"
-            id="title"
-            placeholder="required"
-            required
-            className="bg-form-input rounded-sm p-1 w-[100%]"
-          />
-        </span>
-        <label htmlFor="content" className="mt-2">
-          Content:
-        </label>
-        <textarea
-          name="content"
-          id="content"
-          rows="10"
-          placeholder="required"
-          required
-          className="bg-form-input rounded-sm mb-2 p-1"
-        />
-        <label htmlFor="tags" className="mt-2"></label>
-        <input
-          type="text"
-          name="tags"
-          id="tags"
-          placeholder="mytag,my-tag,my tag"
-          className="bg-form-input rounded-sm p-1 w-[100%]"
-        />
-        <button
-          type="submit"
-          className="border border-button-border active:bg-button-active hover:bg-button-hover"
+    <>
+      <h3 className="text-2xl font-bold text-foreground">New Post</h3>
+      <div className="mt-2 px-4 py-3">
+        <form
+          action={handleNewPost}
+          className="px-4 pb-3 border border-content-border bg-content-panel rounded-md"
         >
-          Submit
-        </button>
-      </fieldset>
-    </form>
+          <fieldset className="flex flex-col text-foreground">
+            <span>
+              <label htmlFor="title">Title:</label>
+              <input
+                type="text"
+                name="title"
+                id="title"
+                placeholder="required"
+                required
+                className="bg-form-input rounded-sm p-1 w-[100%]"
+              />
+            </span>
+            <label htmlFor="content" className="mt-2">
+              Content:
+            </label>
+            <textarea
+              name="content"
+              id="content"
+              rows="10"
+              placeholder="required"
+              required
+              className="bg-form-input rounded-sm p-1"
+            />
+            <label htmlFor="tags" className="mt-2"></label>
+            <input
+              type="text"
+              name="tags"
+              id="tags"
+              placeholder="mytag,my-tag,my tag"
+              className="bg-form-input rounded-sm p-1 w-[100%] mb-2"
+            />
+            <button
+              type="submit"
+              className="border border-button-border active:bg-button-active hover:bg-button-hover"
+            >
+              Submit
+            </button>
+          </fieldset>
+        </form>
+      </div>
+    </>
   );
 }
