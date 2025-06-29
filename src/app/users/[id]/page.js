@@ -1,10 +1,15 @@
 import ListUserPosts from "@/components/ListUserPosts";
 import Footer from "@/components/Footer";
 import TopBioAll from "@/components/TopBioAll";
+import { notFound } from "next/navigation";
 
 export default async function UserPage({ params, searchParams }) {
   const thisuser = (await params).id;
   const reply = (await searchParams).reply;
+
+  if (!parseInt(thisuser)) {
+    notFound();
+  }
 
   return (
     <div>

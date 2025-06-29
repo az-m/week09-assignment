@@ -1,6 +1,7 @@
 import { db } from "@/utils/dbconnection";
 import { currentUser } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
+import { notFound } from "next/navigation";
 
 export default async function TopBioAll({ userID }) {
   const authuser = await currentUser();
@@ -23,6 +24,10 @@ export default async function TopBioAll({ userID }) {
       userID,
     ])
   ).rows[0];
+
+  if (!userdata) {
+    notFound();
+  }
 
   async function followSubmit() {
     "use server";
