@@ -24,7 +24,6 @@ export default async function HomePage({ searchParams }) {
   const following = (
     await db.query(`SELECT * FROM follows WHERE user_id = $1`, [user.id])
   ).rows.length;
-  console.log(following);
 
   return (
     <>

@@ -30,10 +30,12 @@ export default async function FormUpdatePost({ postID }) {
       ],
     };
 
-    await db.query(
-      `UPDATE posts9 SET title = $1, content = $2 WHERE posts9.id = $3`,
-      [data.title, data.content, postID]
-    );
+    if (data.title) {
+      await db.query(
+        `UPDATE posts9 SET title = $1, content = $2 WHERE posts9.id = $3`,
+        [data.title, data.content, postID]
+      );
+    }
 
     db.query(`DELETE FROM tags9 WHERE post_id = $1`, [postID]);
 

@@ -1,6 +1,7 @@
 import { db } from "@/utils/dbconnection";
 import { currentUser } from "@clerk/nextjs/server";
 import ReplyOptions from "@/components/ReplyOptions";
+import Link from "next/link";
 
 export default async function Replies({ postID, host }) {
   const replies = (
@@ -26,7 +27,14 @@ export default async function Replies({ postID, host }) {
           <li key={r.id} className="pb-4 grid grid-cols-[85%_15%]">
             <div className="col-start-1 col-span-1">
               <p>
-                <span>{r.username}</span>
+                <span>
+                  <Link
+                    href={`/users/${r.user_id}`}
+                    className="text-link-reverse hover:text-link-hover-reverse"
+                  >
+                    {r.username}
+                  </Link>
+                </span>
                 <span className="ml-2 text-sm opacity-80">
                   {r.created_at.toLocaleDateString()}
                 </span>
