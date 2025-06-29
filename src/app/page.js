@@ -1,6 +1,4 @@
-import SidebarRight from "@/components/SidebarRight";
 import ListPosts from "@/components/ListPosts";
-import SidebarLeft from "@/components/SidebarLeft";
 import Footer from "@/components/Footer";
 import OnLoad from "@/components/OnLoad";
 import Link from "next/link";
@@ -23,24 +21,28 @@ export default async function HomePage({ searchParams }) {
     ])
   ).rows[0];
 
+  const following = (
+    await db.query(`SELECT * FROM follows WHERE user_id = $1`, [user.id])
+  ).rows.length;
+  console.log(following);
+
   return (
     <>
       <OnLoad />
       <div>
         <div>
-          {/* <SidebarLeft /> */}
           <div className="relative flex flex-col justify-self-center items-center min-w-[375px] max-w-[600px] min-h-[100dvh] bg-background">
             <Tabs.Root defaultValue="following">
               <Tabs.List className="pl-5 pt-5">
                 <Tabs.Trigger
                   value="following"
-                  className="text-xl font-semibold pr-10"
+                  className="text-xl font-semibold pr-10 text-foreground-reverse"
                 >
                   Following
                 </Tabs.Trigger>
                 <Tabs.Trigger
                   value="allposts"
-                  className="text-xl font-semibold"
+                  className="text-xl font-semibold text-foreground-reverse"
                 >
                   All Posts
                 </Tabs.Trigger>
@@ -61,10 +63,8 @@ export default async function HomePage({ searchParams }) {
               <Pencil1Icon className="w-[30px] h-[30px]" />
             </Link>
             {post && <ModalPost host="/" userID={user.id} act="post" />}
-            <Footer />
+            <Footer following={following} />
           </div>
-
-          {/* <SidebarRight /> */}
         </div>
       </div>
     </>

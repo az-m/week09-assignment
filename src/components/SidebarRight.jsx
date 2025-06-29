@@ -18,7 +18,7 @@ export default function SidebarRight({ following }) {
         <HamburgerMenuIcon className="h-[25px] w-[25px]" />
       </p>
       <div
-        className={`p-4 min-h-[100dvh] fixed z-50 top-0 left-[50%] translate-x[-50%] overflow-x-hidden bg-gray-800 ${
+        className={`p-4 min-h-[100dvh] text-foreground-reverse fixed z-50 top-0 left-[50%] translate-x[-50%] overflow-x-hidden bg-gray-800 ${
           open ? `w-[50%]` : `w-[0%]`
         } ${!open && `hidden`}`}
       >

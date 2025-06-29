@@ -1,5 +1,4 @@
 import ListUserPosts from "@/components/ListUserPosts";
-import SidebarLeft from "@/components/SidebarLeft";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import ModalPost from "@/components/ModalPost";
@@ -30,7 +29,6 @@ export default async function UserPage({ searchParams }) {
   return (
     <div>
       <div>
-        <SidebarLeft />
         <div className="relative flex flex-col justify-self-center items-center min-w-[375px] max-w-[600px] min-h-[100dvh] bg-background">
           <TopBioUser
             userID={user.id}

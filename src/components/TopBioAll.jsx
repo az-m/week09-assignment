@@ -45,7 +45,7 @@ export default async function TopBioAll({ userID }) {
   }
 
   return (
-    <div className="flex flex-col items-center mt-5 bg-foreground text-background p-4 rounded-sm w-[75%]">
+    <div className="flex flex-col items-center mt-5 bg-foreground dark:text-background text-foreground-reverse p-4 rounded-sm w-[75%]">
       <p className="text-xl mb-2 font-semibold">{userdata.username}</p>
       <p className="max-w-[300px]">{userdata.about}</p>
       <div className="mt-3">

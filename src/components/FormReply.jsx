@@ -37,7 +37,10 @@ export default async function FormReply({ postID, host }) {
         className="pt-3 pl-4 pr-4 pb-3 my-4 bg-sky-900 rounded-xs"
       >
         <fieldset className="flex flex-col">
-          <label htmlFor="content" className="mb-1 ml-1">
+          <label
+            htmlFor="content"
+            className="mb-1 ml-1 text-foreground-reverse"
+          >
             Reply
           </label>
           <textarea
@@ -50,7 +53,7 @@ export default async function FormReply({ postID, host }) {
           />
           <button
             type="submit"
-            className="border border-button-border active:bg-button-active hover:bg-button-hover"
+            className="text-foreground-reverse border border-button-border active:bg-button-active hover:bg-button-hover"
           >
             Submit
           </button>

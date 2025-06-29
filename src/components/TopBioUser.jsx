@@ -33,7 +33,7 @@ export default function TopBioUser({ userID, userName, userBio }) {
 
   return (
     <>
-      <div className="mt-5 bg-foreground text-background p-4 rounded-sm w-[75%] ">
+      <div className="mt-5 bg-foreground dark:text-background text-foreground-reverse p-4 rounded-sm w-[75%] ">
         <Dialog.Root>
           <Dialog.Trigger asChild>
             <p className="flex justify-center text-xl mb-2 hover:cursor-pointer hover:text-link font-semibold">

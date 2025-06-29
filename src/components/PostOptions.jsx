@@ -20,7 +20,7 @@ export default function PostOptions({ puid, uid, pid, host }) {
         </span>
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
-        <DropdownMenu.Content className="bg-gray-900 py-2 px-4 -translate-x-8 translate-y-2 rounded-sm">
+        <DropdownMenu.Content className="bg-gray-900 text-foreground-reverse py-2 px-4 -translate-x-8 translate-y-2 rounded-sm">
           <p onClick={handleClick} className="hover:cursor-pointer">
             X
           </p>

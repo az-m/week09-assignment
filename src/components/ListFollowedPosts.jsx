@@ -36,7 +36,7 @@ ORDER BY created_at DESC`,
             <span>
               <Link
                 href={`/users/${post.user_id}`}
-                className="text-link hover:text-link-hover"
+                className="text-link-reverse hover:text-link-hover-reverse"
               >
                 {post.username}
               </Link>

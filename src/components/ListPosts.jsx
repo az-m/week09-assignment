@@ -35,7 +35,7 @@ export default async function ListPosts({ userID, reply, host }) {
             <span>
               <Link
                 href={`/users/${post.user_id}`}
-                className="text-link hover:text-link-hover"
+                className="text-link-reverse hover:text-link-hover-reverse"
               >
                 {post.username}
               </Link>
@@ -47,7 +47,10 @@ export default async function ListPosts({ userID, reply, host }) {
           {post.og_user && (
             <p className="py-2 text-sm">
               Reposted from{" "}
-              <Link href={`/users/${post.from_user}`} className="text-link">
+              <Link
+                href={`/users/${post.from_user}`}
+                className="text-link-reverse hover:text-link-hover-reverse"
+              >
                 {post.og_user}
               </Link>
             </p>

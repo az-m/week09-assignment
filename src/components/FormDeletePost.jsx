@@ -22,9 +22,14 @@ export default async function FormDeletePost({ postID }) {
 
   return (
     <>
-      <p className="font-bold pt-2 pl-4 pr-4 text-xl">{post.title}</p>
+      <p className="text-foreground-reverse font-bold pt-2 pl-4 pr-4 text-xl">
+        {post.title}
+      </p>
       {post.content.split("<br />").map((para, index) => (
-        <p key={index} className="pl-4 pr-4 pt-2 pb-2 lg:text-lg">
+        <p
+          key={index}
+          className="text-foreground-reverse pl-4 pr-4 pt-2 pb-2 lg:text-lg"
+        >
           {para}
         </p>
       ))}
@@ -32,7 +37,7 @@ export default async function FormDeletePost({ postID }) {
         <fieldset></fieldset>
         <button
           type="submit"
-          className="p-4 bg-red-700 border hover:bg-red-500 my-4 font-semibold"
+          className="text-foreground-reverse p-4 bg-red-700 border hover:bg-red-500 my-4 font-semibold"
         >
           DELETE
         </button>
