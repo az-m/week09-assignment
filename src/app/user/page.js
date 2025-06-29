@@ -1,4 +1,3 @@
-import SidebarRight from "@/components/SidebarRight";
 import ListUserPosts from "@/components/ListUserPosts";
 import SidebarLeft from "@/components/SidebarLeft";
 import Link from "next/link";
@@ -23,6 +22,11 @@ export default async function UserPage({ searchParams }) {
     ])
   ).rows[0];
 
+  const following = (
+    await db.query(`SELECT * FROM follows WHERE user_id = $1`, [user.id])
+  ).rows.length;
+  console.log(following);
+
   return (
     <div>
       <div>
@@ -43,9 +47,8 @@ export default async function UserPage({ searchParams }) {
           {post && <ModalPost host="/user" userID={user.id} act="post" />}
           {upd && <ModalPost host="/user" act="upd" id={editid} />}
           {del && <ModalPost host="/user" act="del" id={editid} />}
-          <Footer />
+          <Footer following={following} />
         </div>
-        <SidebarRight />
       </div>
     </div>
   );

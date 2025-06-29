@@ -45,15 +45,15 @@ export default async function TopBioAll({ userID }) {
   }
 
   return (
-    <div className="flex flex-col items-center mt-10">
+    <div className="flex flex-col items-center mt-5 bg-foreground text-background p-4 rounded-sm w-[75%]">
       <p className="text-xl mb-2 font-semibold">{userdata.username}</p>
       <p className="max-w-[300px]">{userdata.about}</p>
-      <div className="mt-5">
+      <div className="mt-3">
         {!follows && (
           <form action={followSubmit}>
             <button
               type="submit"
-              className="bg-sky-500 p-2 rounded-lg text-black"
+              className="bg-sky-500 p-2 rounded-lg text-black text-xs"
             >
               Follow
             </button>
@@ -63,7 +63,7 @@ export default async function TopBioAll({ userID }) {
           <form action={unfollowSubmit}>
             <button
               type="submit"
-              className="bg-sky-500 p-2 rounded-lg text-black"
+              className="bg-sky-500 p-2 rounded-lg text-black text-xs"
             >
               Unfollow
             </button>
