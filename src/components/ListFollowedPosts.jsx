@@ -59,7 +59,7 @@ ORDER BY created_at DESC`,
           {reply == post.id && (
             <FormReply postID={post.id} host={host} reply={reply} />
           )}
-          <Replies postID={post.id} />
+          <Replies postID={post.id} host={host} />
         </div>
       ))}
       <div></div>

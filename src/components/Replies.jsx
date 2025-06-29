@@ -1,14 +1,23 @@
 import { db } from "@/utils/dbconnection";
+import { currentUser } from "@clerk/nextjs/server";
+import ReplyOptions from "@/components/ReplyOptions";
 
-export default async function Replies({ postID }) {
+export default async function Replies({ postID, host }) {
   const replies = (
     await db.query(
-      `SELECT replies9.id, content, replies9.created_at, users.username FROM replies9
+      `SELECT replies9.id, content, replies9.created_at, user_id, users.username FROM replies9
       JOIN users ON replies9.user_id = users.id
       WHERE replies9.post_id = $1`,
       [postID]
     )
   ).rows;
+
+  const authuser = await currentUser();
+  const user = (
+    await db.query(`SELECT id, username, about FROM users WHERE usercl = $1`, [
+      authuser.id,
+    ])
+  ).rows[0];
 
   return (
     <div>
@@ -26,8 +35,10 @@ export default async function Replies({ postID }) {
                 {r.content}
               </p>
             </div>
-            <div className="col-start-2 col-span-1 justify-items-end">
-              {/* <CommentOptions postID={postID} commentID={comment.id} /> */}
+            <div className="col-start-2 col-span-1 justify-self-end self-end">
+              {r.user_id == user.id && (
+                <ReplyOptions replyID={r.id} host={host} />
+              )}
             </div>
           </li>
         ))}

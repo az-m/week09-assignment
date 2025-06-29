@@ -79,7 +79,7 @@ export default async function ListPosts({ userID, reply, host }) {
           {reply == post.id && (
             <FormReply postID={post.id} host={host} reply={reply} />
           )}
-          <Replies postID={post.id} />
+          <Replies postID={post.id} host={host} />
         </div>
       ))}
     </div>

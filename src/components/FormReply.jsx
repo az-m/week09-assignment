@@ -1,7 +1,7 @@
 import { revalidatePath } from "next/cache";
 import { db } from "@/utils/dbconnection";
 import { currentUser } from "@clerk/nextjs/server";
-import { redirect } from "next/dist/server/api-utils";
+import { redirect } from "next/navigation";
 import Link from "next/link";
 
 export default async function FormReply({ postID, host }) {
