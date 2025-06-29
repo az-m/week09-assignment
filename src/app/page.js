@@ -51,7 +51,7 @@ export default async function HomePage({ searchParams }) {
               </Tabs.Content>
               <Tabs.Content value="allposts">
                 <SpacerRight />
-                <ListPosts reply={reply} host="/" />
+                <ListPosts reply={reply} userID={user.id} host="/" />
               </Tabs.Content>
             </Tabs.Root>
             <Link

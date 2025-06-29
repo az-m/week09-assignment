@@ -1,5 +1,5 @@
 import SidebarRight from "@/components/SidebarRight";
-import ListPosts from "@/components/ListPosts";
+import ListUserPosts from "@/components/ListUserPosts";
 import SidebarLeft from "@/components/SidebarLeft";
 import Link from "next/link";
 import Footer from "@/components/Footer";
@@ -33,7 +33,7 @@ export default async function UserPage({ searchParams }) {
             userName={user.username}
             userBio={user.about}
           />
-          <ListPosts userID={user.id} reply={reply} host="/user" />
+          <ListUserPosts userID={user.id} reply={reply} host="/user" />
           <Link
             href="/user?post=true"
             className="fixed right-5 bottom-15 items-center content-center p-2 bg-sky-500 rounded-[50%] w-[50px] h-[50px] z-2"

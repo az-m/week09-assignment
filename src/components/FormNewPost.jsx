@@ -1,6 +1,7 @@
 import { db } from "@/utils/dbconnection";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { currentUser } from "@clerk/nextjs/server";
 
 export default function FormNewPost({ userID }) {
   async function handleNewPost(formData) {

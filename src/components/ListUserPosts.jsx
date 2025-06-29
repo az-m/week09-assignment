@@ -3,17 +3,18 @@ import Link from "next/link";
 import PostOptions from "@/components/PostOptions";
 import Replies from "@/components/Replies";
 import FormReply from "@/components/FormReply";
-import ReblogPost from "@/components/ReblogPost";
 
-export default async function ListFollowedPosts({ userID, reply, host }) {
+export default async function ListPosts({ userID, reply, host }) {
   const userPosts = (
     await db.query(
-      `SELECT posts9.id, posts9.title, posts9.content, posts9.user_id, posts9.created_at, users.username, ARRAY_AGG(tags9.tag) AS tags FROM follows 
-JOIN posts9 ON follows.follows_id = posts9.user_id 
+      `SELECT posts9.id, posts9.title, posts9.content, posts9.created_at, from_user, users.id AS user_id, users.username AS username, og.username AS og_user,
+ARRAY_AGG(tags9.tag) AS tags
+FROM posts9
 JOIN users ON posts9.user_id = users.id
+LEFT JOIN users AS og ON posts9.from_user = og.id
 JOIN tags9 ON posts9.id = tags9.post_id
-WHERE follows.user_id = $1
-GROUP BY posts9.id, posts9.title, posts9.content, posts9.user_id, posts9.created_at, users.username
+WHERE posts9.user_id = $1
+GROUP BY posts9.id, posts9.title, posts9.content, posts9.created_at, from_user, users.id, users.username, og.username
 ORDER BY created_at DESC`,
       [userID]
     )
@@ -45,6 +46,14 @@ ORDER BY created_at DESC`,
               {post.created_at.toDateString()}
             </span>
           </p>
+          {post.og_user && (
+            <p className="py-2 text-sm">
+              Reposted from{" "}
+              <Link href={`/users/${post.from_user}`} className="text-link">
+                {post.og_user}
+              </Link>
+            </p>
+          )}
           <p className="font-bold pt-2 pl-4 pr-4 text-xl">{post.title}</p>
           {post.content.split("<br />").map((para, index) => (
             <p key={index} className="pl-4 pr-4 pt-2 pb-2 lg:text-lg">
@@ -54,14 +63,14 @@ ORDER BY created_at DESC`,
           <p className="p-2 border-t border-content-border opacity-70">
             {post.tags[0] && "#" + post.tags.toString().replace(",", " #")}
           </p>
-          <div className="grid grid-cols-2">
-            {userID !== post.user_id ? (
-              <ReblogPost id={post.id} userID={userID} />
-            ) : (
-              <div></div>
-            )}
+          <div>
             <div className="justify-self-end">
-              <PostOptions pid={post.id} uid={null} host={host} />
+              <PostOptions
+                puid={post.user_id}
+                uid={userID}
+                pid={post.id}
+                host={host}
+              />
             </div>
           </div>
           {reply == post.id && (
@@ -70,7 +79,6 @@ ORDER BY created_at DESC`,
           <Replies postID={post.id} host={host} />
         </div>
       ))}
-      <div></div>
     </div>
   );
 }
