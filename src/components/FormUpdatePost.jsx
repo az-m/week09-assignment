@@ -5,11 +5,11 @@ import { redirect } from "next/navigation";
 export default async function FormUpdatePost({ postID }) {
   const post = (
     await db.query(
-      `SELECT posts9.title, posts9.content, ARRAY_AGG(tags9.tag) AS tags
+      `SELECT posts9.title, posts9.content, from_user, ARRAY_AGG(tags9.tag) AS tags
         FROM posts9 
         JOIN tags9 ON posts9.id = tags9.post_id
         WHERE posts9.id= $1
-        GROUP BY posts9.title, posts9.content`,
+        GROUP BY posts9.title, posts9.content, from_user`,
       [postID]
     )
   ).rows[0];
@@ -63,28 +63,34 @@ export default async function FormUpdatePost({ postID }) {
           className="px-4 pb-3 border border-content-border bg-content-panel rounded-md"
         >
           <fieldset className="flex flex-col text-foreground">
-            <span>
-              <label htmlFor="title">Title:</label>
-              <input
-                type="text"
-                name="title"
-                id="title"
-                defaultValue={post.title}
-                required
-                className="bg-form-input rounded-sm p-1 w-[100%]"
-              />
-            </span>
-            <label htmlFor="content" className="mt-2">
-              Content:
-            </label>
-            <textarea
-              name="content"
-              id="content"
-              defaultValue={post.content}
-              rows="10"
-              required
-              className="bg-form-input rounded-sm p-1"
-            />
+            {!post.from_user && (
+              <span>
+                <label htmlFor="title">Title:</label>
+                <input
+                  type="text"
+                  name="title"
+                  id="title"
+                  defaultValue={post.title}
+                  required
+                  className="bg-form-input rounded-sm p-1 w-[100%]"
+                />
+              </span>
+            )}
+            {!post.from_user && (
+              <>
+                <label htmlFor="content" className="mt-2">
+                  Content:
+                </label>
+                <textarea
+                  name="content"
+                  id="content"
+                  defaultValue={post.content}
+                  rows="10"
+                  required
+                  className="bg-form-input rounded-sm p-1"
+                />
+              </>
+            )}
             <label htmlFor="tags" className="mt-2"></label>
             <input
               type="text"
