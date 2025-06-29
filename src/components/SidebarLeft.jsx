@@ -1,7 +1,7 @@
 import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 
-export default async function LeftSidebar() {
+export default async function SidebarLeft() {
   return (
     <div className="hidden">
       <UserButton />

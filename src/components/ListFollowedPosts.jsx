@@ -2,36 +2,21 @@ import { db } from "@/utils/dbconnection";
 import Link from "next/link";
 import PostOptions from "@/components/PostOptions";
 import Replies from "@/components/Replies";
-import ReplyForm from "@/components/ReplyForm";
+import FormReply from "@/components/FormReply";
 
-export default async function PostList({ userID, reply, host }) {
-  let userPosts;
-
-  if (userID) {
-    userPosts = (
-      await db.query(
-        `SELECT posts9.id, posts9.title, posts9.content, posts9.created_at, users.id AS user_id, users.username, ARRAY_AGG(tags9.tag) AS tags
-        FROM posts9 
-        JOIN users ON posts9.user_id = users.id
-        JOIN tags9 ON posts9.id = tags9.post_id
-        WHERE posts9.user_id = $1
-        GROUP BY posts9.id, posts9.title, posts9.content, posts9.created_at, users.id, users.username
-        ORDER BY created_at DESC`,
-        [userID]
-      )
-    ).rows;
-  } else {
-    userPosts = (
-      await db.query(
-        `SELECT posts9.id, posts9.title, posts9.content, posts9.created_at, users.id AS user_id, users.username, ARRAY_AGG(tags9.tag) AS tags
-        FROM posts9 
-        JOIN users ON posts9.user_id = users.id
-        JOIN tags9 ON posts9.id = tags9.post_id
-        GROUP BY posts9.id, posts9.title, posts9.content, posts9.created_at, users.id, users.username
-        ORDER BY created_at DESC`
-      )
-    ).rows;
-  }
+export default async function ListFollowedPosts({ userID, reply, host }) {
+  const userPosts = (
+    await db.query(
+      `SELECT posts9.id, posts9.title, posts9.content, posts9.user_id, posts9.created_at, users.username, ARRAY_AGG(tags9.tag) AS tags FROM follows 
+JOIN posts9 ON follows.follows_id = posts9.user_id 
+JOIN users ON posts9.user_id = users.id
+JOIN tags9 ON posts9.id = tags9.post_id
+WHERE follows.user_id = $1
+GROUP BY posts9.id, posts9.title, posts9.content, posts9.user_id, posts9.created_at, users.username
+ORDER BY created_at DESC`,
+      [userID]
+    )
+  ).rows;
 
   let noPosts = "";
   if (userPosts.length === 0) {
@@ -69,19 +54,15 @@ export default async function PostList({ userID, reply, host }) {
             {post.tags[0] && "#" + post.tags.toString().replace(",", " #")}
           </p>
           <div className="justify-self-end">
-            <PostOptions
-              puid={post.user_id}
-              uid={userID}
-              pid={post.id}
-              host={host}
-            />
+            <PostOptions pid={post.id} uid={null} host={host} />
           </div>
           {reply == post.id && (
-            <ReplyForm postID={post.id} host={host} reply={reply} />
+            <FormReply postID={post.id} host={host} reply={reply} />
           )}
           <Replies postID={post.id} />
         </div>
       ))}
+      <div></div>
     </div>
   );
 }

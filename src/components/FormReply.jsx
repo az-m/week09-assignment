@@ -4,7 +4,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/dist/server/api-utils";
 import Link from "next/link";
 
-export default async function CommentForm({ postID, host }) {
+export default async function FormReply({ postID, host }) {
   const authuser = await currentUser();
   const user = (
     await db.query(`SELECT id, username, about FROM users WHERE usercl = $1`, [

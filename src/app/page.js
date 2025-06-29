@@ -1,16 +1,16 @@
-import RightSidebar from "@/components/RightSidebar";
-import PostList from "@/components/PostList";
-import LeftSidebar from "@/components/LeftSidebar";
+import SidebarRight from "@/components/SidebarRight";
+import ListPosts from "@/components/ListPosts";
+import SidebarLeft from "@/components/SidebarLeft";
 import Footer from "@/components/Footer";
 import OnLoad from "@/components/OnLoad";
 import Link from "next/link";
-import PostModal from "@/components/PostModal";
+import ModalPost from "@/components/ModalPost";
 import { currentUser } from "@clerk/nextjs/server";
 import { db } from "@/utils/dbconnection";
 import { Pencil1Icon } from "@radix-ui/react-icons";
 import { Tabs } from "radix-ui";
 import { SpacerLeft, SpacerRight } from "@/components/Spacer";
-import FollowedPosts from "@/components/FollowedPosts";
+import ListFollowedPosts from "@/components/ListFollowedPosts";
 
 export default async function HomePage({ searchParams }) {
   const post = (await searchParams).post;
@@ -28,7 +28,7 @@ export default async function HomePage({ searchParams }) {
       <OnLoad />
       <div>
         <div>
-          {/* <LeftSidebar /> */}
+          {/* <SidebarLeft /> */}
           <div className="relative flex flex-col justify-self-center items-center min-w-[375px] max-w-[600px] min-h-[100dvh] bg-background">
             <Tabs.Root defaultValue="following">
               <Tabs.List className="pl-5 pt-5">
@@ -47,11 +47,11 @@ export default async function HomePage({ searchParams }) {
               </Tabs.List>
               <Tabs.Content value="following">
                 <SpacerLeft />
-                <FollowedPosts reply={reply} userID={user.id} host="/" />
+                <ListFollowedPosts reply={reply} userID={user.id} host="/" />
               </Tabs.Content>
               <Tabs.Content value="allposts">
                 <SpacerRight />
-                <PostList reply={reply} host="/" />
+                <ListPosts reply={reply} host="/" />
               </Tabs.Content>
             </Tabs.Root>
             <Link
@@ -60,11 +60,11 @@ export default async function HomePage({ searchParams }) {
             >
               <Pencil1Icon className="w-[30px] h-[30px]" />
             </Link>
-            {post && <PostModal host="/" userID={user.id} act="post" />}
+            {post && <ModalPost host="/" userID={user.id} act="post" />}
             <Footer />
           </div>
 
-          {/* <RightSidebar /> */}
+          {/* <SidebarRight /> */}
         </div>
       </div>
     </>

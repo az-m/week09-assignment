@@ -2,7 +2,7 @@ import { db } from "@/utils/dbconnection";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export default async function UpdatePostForm({ postID }) {
+export default async function FormUpdatePost({ postID }) {
   const post = (
     await db.query(
       `SELECT posts9.title, posts9.content, ARRAY_AGG(tags9.tag) AS tags

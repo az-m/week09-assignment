@@ -1,6 +1,6 @@
-import RightSidebar from "@/components/RightSidebar";
-import PostList from "@/components/PostList";
-import LeftSidebar from "@/components/LeftSidebar";
+import SidebarRight from "@/components/SidebarRight";
+import ListPosts from "@/components/ListPosts";
+import SidebarLeft from "@/components/SidebarLeft";
 import Footer from "@/components/Footer";
 import TopBioAll from "@/components/TopBioAll";
 
@@ -11,17 +11,17 @@ export default async function UserPage({ params, searchParams }) {
   return (
     <div>
       <div>
-        <LeftSidebar />
+        <SidebarLeft />
         <div className="relative flex flex-col justify-self-center items-center min-w-[375px] max-w-[600px] min-h-[100dvh] bg-background">
           <TopBioAll userID={thisuser} />
-          <PostList
+          <ListPosts
             userID={thisuser}
             host={`/users/${thisuser}`}
             reply={reply}
           />
           <Footer />
         </div>
-        <RightSidebar />
+        <SidebarRight />
       </div>
     </div>
   );

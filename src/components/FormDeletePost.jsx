@@ -2,7 +2,7 @@ import { db } from "@/utils/dbconnection";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export default async function DeletePostForm({ postID }) {
+export default async function FormDeletePost({ postID }) {
   const post = (
     await db.query(
       `SELECT posts9.title, posts9.content FROM posts9 WHERE posts9.id= $1`,
