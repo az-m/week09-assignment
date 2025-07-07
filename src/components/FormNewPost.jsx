@@ -20,30 +20,19 @@ export default function FormNewPost({ userID }) {
       ],
     };
 
-    let temp = parseInt(Math.random() * (1000000 - 1) + 1);
-
-    await db.query(
-      `INSERT INTO posts9 (title, content, user_id, temp) VALUES ($1, $2, $3, $4)`,
-      [data.title, data.content, userID, temp]
-    );
-
     const postID = (
-      await db.query(`SELECT id FROM posts9 WHERE temp = $1`, [temp])
+      await db.query(
+        `INSERT INTO posts9 (title, content, user_id) VALUES ($1, $2, $3) RETURNING id`,
+        [data.title, data.content, userID]
+      )
     ).rows[0].id;
 
-    if (data.tags.length === 0) {
-      await db.query(`INSERT INTO tags9 (post_id) VALUES ($1)`, [postID]);
-    } else {
-      for (let t = 0; t < data.tags.length; t++) {
-        await db.query(`INSERT INTO tags9 (tag, post_id) VALUES ($1,$2)`, [
-          data.tags[t],
-          postID,
-        ]);
-      }
+    for (let t = 0; t < data.tags.length; t++) {
+      await db.query(`INSERT INTO tags9 (tag, post_id) VALUES ($1,$2)`, [
+        data.tags[t],
+        postID,
+      ]);
     }
-
-    temp = null;
-    await db.query(`UPDATE posts9 SET temp = $1`, [temp]);
 
     revalidatePath("/");
     revalidatePath("/user");

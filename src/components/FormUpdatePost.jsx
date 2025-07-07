@@ -7,7 +7,7 @@ export default async function FormUpdatePost({ postID }) {
     await db.query(
       `SELECT posts9.title, posts9.content, from_user, ARRAY_AGG(tags9.tag) AS tags
         FROM posts9 
-        JOIN tags9 ON posts9.id = tags9.post_id
+        LEFT JOIN tags9 ON posts9.id = tags9.post_id
         WHERE posts9.id= $1
         GROUP BY posts9.title, posts9.content, from_user`,
       [postID]
@@ -39,15 +39,11 @@ export default async function FormUpdatePost({ postID }) {
 
     db.query(`DELETE FROM tags9 WHERE post_id = $1`, [postID]);
 
-    if (data.tags.length === 0) {
-      await db.query(`INSERT INTO tags9 (post_id) VALUES ($1)`, [postID]);
-    } else {
-      for (let t = 0; t < data.tags.length; t++) {
-        await db.query(`INSERT INTO tags9 (tag, post_id) VALUES ($1,$2)`, [
-          data.tags[t],
-          postID,
-        ]);
-      }
+    for (let t = 0; t < data.tags.length; t++) {
+      await db.query(`INSERT INTO tags9 (tag, post_id) VALUES ($1,$2)`, [
+        data.tags[t],
+        postID,
+      ]);
     }
 
     revalidatePath("/");

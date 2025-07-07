@@ -11,7 +11,7 @@ export default async function ListFollowedPosts({ userID, reply, host }) {
       `SELECT posts9.id, posts9.title, posts9.content, posts9.user_id, posts9.created_at, users.username, ARRAY_AGG(tags9.tag) AS tags FROM follows 
 JOIN posts9 ON follows.follows_id = posts9.user_id 
 JOIN users ON posts9.user_id = users.id
-JOIN tags9 ON posts9.id = tags9.post_id
+LEFT JOIN tags9 ON posts9.id = tags9.post_id
 WHERE follows.user_id = $1
 GROUP BY posts9.id, posts9.title, posts9.content, posts9.user_id, posts9.created_at, users.username
 ORDER BY created_at DESC`,

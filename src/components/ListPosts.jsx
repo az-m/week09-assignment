@@ -12,7 +12,7 @@ export default async function ListPosts({ userID, reply, host }) {
         FROM posts9 
         JOIN users ON posts9.user_id = users.id
         LEFT JOIN users AS og ON posts9.from_user = og.id
-        JOIN tags9 ON posts9.id = tags9.post_id
+        LEFT JOIN tags9 ON posts9.id = tags9.post_id
         GROUP BY posts9.id, posts9.title, posts9.content, posts9.created_at, from_user, users.id, users.username, og.username
         ORDER BY created_at DESC`
     )
