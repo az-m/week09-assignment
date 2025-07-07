@@ -1,6 +1,5 @@
 import ListPosts from "@/components/ListPosts";
 import Footer from "@/components/Footer";
-import OnLoad from "@/components/OnLoad";
 import Link from "next/link";
 import ModalPost from "@/components/ModalPost";
 import { currentUser } from "@clerk/nextjs/server";
@@ -21,13 +20,20 @@ export default async function HomePage({ searchParams }) {
     ])
   ).rows[0];
 
+  if (!user) {
+    await db.query(
+      `INSERT INTO users (username, about, usercl) VALUES ($1, $2, $3)`,
+      ["your-display-name", "About your blog", authuser.id]
+    );
+    redirect("/");
+  }
+
   const following = (
     await db.query(`SELECT * FROM follows WHERE user_id = $1`, [user.id])
   ).rows.length;
 
   return (
     <>
-      <OnLoad />
       <div>
         <div>
           <div className="relative flex flex-col justify-self-center items-center min-w-[375px] max-w-[600px] min-h-[100dvh] bg-background">
